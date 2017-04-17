@@ -6,6 +6,7 @@ var colorArray;
 var symbolAttribute;
 var content;
 var overlay;
+var select;
 
 $(document).ready(function(){
 	
@@ -14,8 +15,7 @@ $(document).ready(function(){
 	createTree();
 	$("#full_ext").click(FullExt);
 	popWindow();
-	
-
+	$('#clear_select').click(ClearSelect);
 	
 });
 		
@@ -26,6 +26,11 @@ function FullExt() {
 	myView.setZoom(8);
 };
 
+//clear selection on map
+function ClearSelect(){
+	map.removeInteraction(select);
+	overlay.setPosition(undefined);
+};
 
 function createTree(){
 //add layer control panel
@@ -102,17 +107,17 @@ function createTree(){
 		if(data.node.children.length>0){
 			
 			for (i in cl){
-				console.log(cl[i]);
+				//console.log(cl[i]);
 				child_info=data.instance.get_node(cl[i]); //get children node by node id
-				console.log(child_info.text);
+				//console.log(child_info.text);
 				SelectNode(data,child_info.text);
-				console.log('1111111')
+				//console.log('1111111')
 			}
 			
 		}
 		else{
 			SelectNode(data,data.node.text);
-			console.log('222222')
+			//console.log('222222')
 		}
 	});
 
@@ -211,11 +216,14 @@ function setupMap(myLayers){
 
 	map_extent = map.getView().calculateExtent(map.getSize());
 	
+	select=null;
+	var select_singleClick;
 	 /*
     * Add a click handler to the map to render the popup.
     */
     map.on('singleclick', function(evt) {
     	
+
     	//only show pop up window if click at loaded layers
     	var feature = map.forEachFeatureAtPixel(evt.pixel,function(feature,layer){
     		return feature;
@@ -231,24 +239,53 @@ function setupMap(myLayers){
     			content.innerHTML = '<p>County: '+props.county+'</p>'
     		}  	
     		else if (feature.getId().indexOf('ma_citytown')!=-1){
-    			content.innerHTML = '<p>Town: '+props.town+'</p>'
+    			content.innerHTML = '<p>Town: '+props.town_c+'</p>'
+    		}
+    		else if (feature.getId().indexOf('ma_library_prj')!==-1){
+    			content.innerHTML='<p>Name: '+props.name+'</p>'+'<p>Office: '+props.office+'</p>'+'<p>Address: '+props.address+'</p>'+'<p>Town: '+props.town+'</p>'+'<p>State: '+props.state+'</p>'
+    		}
+    		else if (feature.getId().indexOf('ma_bike')!==-1){
+    			content.innerHTML='<p>Trail Name: '+props.trailname+'</p>'
+    		}
+    		else if (feature.getId().indexOf('ma_parks')!==-1){
+    			content.innerHTML='<p>Park Name: '+props.name+'</p>'
+    		}
+    		else if (feature.getId().indexOf('ma_college')!==-1){
+    			content.innerHTML='<p>College Name: '+props.college+'</p>'+'<p>Address1: '+props.address+'</p>'+'<p>Address2: '+props.cityst+'</p>'+'<p>Zip Code: '+props.zipcode+'</p>'+'<p>URL: '+props.url+'</p>'
+    		}
+    		else if (feature.getId().indexOf('ma_hospital')!==-1){
+    			content.innerHTML='<p>Hospital Name: '+props.name+'</p>'
+    		}
+    		else if (feature.getId().indexOf('ma_citytown_crime')!==-1){
+    			content.innerHTML='<p>Town/City: '+props.town_c+'</p>'+'<p>Number of Incidents: '+props.num_incide+'</p>'
     		}
     		else{
-    			content.innerHTML='<p>test</p>'
-    		}
-
+    			content.innerHTML='<p>TEST</P>'
     		};
     	
     	
        	overlay.setPosition(coord);
     	
-    });
 
-};
+    	};
+    	//add map interaction to highlight select polygon
+    	if (select!=null){
+    		map.removeInteraction(select);
+    	}
+    	select_singleClick=new ol.interaction.Select();
+ 		select=select_singleClick;
+ 		map.addInteraction(select);
+	});
+
+
+
+}
+
+
 
 //toggle layers
 function SelectNode(data,x){
-	console.log(x);
+	//console.log(x);
 	var layer;
 	map.getLayers().forEach(function(lyr){
 				

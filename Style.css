@@ -79,6 +79,16 @@ body{
 	position: absolute; /*map tool position: absolute to map;*/
 	cursor: pointer;
 }
+
+#clear_select{
+	width: 30px;
+	height: 30px;
+	top:60px;
+	right:10px;
+	z-index: 2;
+	position: absolute; /*map tool position: absolute to map;*/
+	cursor: pointer;
+}
 /*
 .sidenav{
 	height:100%;
@@ -132,6 +142,7 @@ border: 1px solid #cccccc;
 bottom: 12px;
 left: -50px;
 min-width: 280px;
+font-size:10px;
 }
 .ol-popup:after, .ol-popup:before {
 top: 100%;
