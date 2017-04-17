@@ -1,0 +1,165 @@
+*{
+	/* so 100% means 100%*/
+	box-sizing: border-box;
+}
+html,body{
+	/*make the body to be as tall as brower window */
+	height:100%;
+	background-color: #ccc;
+	margin: 0px;
+}
+body{
+	margin: 0px;
+	padding: 0px;
+	background: white;
+	font-size: 19px !important;
+	font-family: Georgia;
+	
+}
+.allC{
+	height: 100%;
+	margin:0px;
+	float:left;
+	width: 100%;
+}
+
+.header{
+	/*with the body as tall as the browser window
+	this will be too*/
+	height: 50px;
+	margin:0px;
+	float:left;
+	width: 100%;
+}
+
+.header h2{
+	margin:0px;
+	padding: 0 15px;
+	height:50px;
+	line-height: 50px;
+	background-color:grey;
+}
+.left_panel {
+	margin: 0px;
+	padding-top:5px;
+	height: calc(100% - 50px);
+	float:left;
+	background-color: #ffffff;
+	width:20%;
+	overflow:auto;
+	
+}
+
+#jstree{
+	margin:0px;
+	height: 100%;
+	float: left;
+	background-color: #ffffff;
+	width: 100%;
+	overflow:auto;
+
+}
+
+.jstree-themeicon-custom{
+	background-size:contain !important;
+}
+
+.jstree-leaf{
+	font-size:18px !important;
+	height:18px !important;
+	font-family: serif
+}
+
+#full_ext{
+	width: 30px;
+	height: 30px;
+	top:10px;
+	right:10px;
+	z-index: 2;
+	position: absolute; /*map tool position: absolute to map;*/
+	cursor: pointer;
+}
+/*
+.sidenav{
+	height:100%;
+	width:0;
+	position: fixed;
+	z-index: 1;
+	top:0;
+	left:0;
+	background-color: #111;
+	overflow-x: hidden;
+	transition:0.5s;
+	padding-top:60px;
+}
+.sidenav a{
+	padding:8px 8px 8px 32px;
+	text-decoration: none;
+	font-size: 25px;
+	color: #818181;
+	display:block;
+	transition:0.3s;
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+	color:#f1f1f1;
+}
+*/
+#map_canvas{
+	width:80%;
+	height:calc(100% - 50px);
+	border:1px solid #000;
+	background-color: grey;
+	float:right;
+	position: relative; /*map position:relative;*/ 
+}
+#mymap{
+	width: 100%;
+	height: 100%;
+	float:right;
+	position: relative;
+}
+
+/*pop up style*/
+.ol-popup {
+position: absolute;
+background-color: white;
+-webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+padding: 15px;
+border-radius: 10px;
+border: 1px solid #cccccc;
+bottom: 12px;
+left: -50px;
+min-width: 280px;
+}
+.ol-popup:after, .ol-popup:before {
+top: 100%;
+border: solid transparent;
+content: " ";
+height: 0;
+width: 0;
+position: absolute;
+pointer-events: none;
+}
+.ol-popup:after {
+border-top-color: white;
+border-width: 10px;
+left: 48px;
+margin-left: -10px;
+}
+.ol-popup:before {
+border-top-color: #cccccc;
+border-width: 11px;
+left: 48px;
+margin-left: -11px;
+}
+.ol-popup-closer {
+text-decoration: none;
+position: absolute;
+top: 2px;
+right: 8px;
+}
+.ol-popup-closer:after {
+content: "✖";
+}
